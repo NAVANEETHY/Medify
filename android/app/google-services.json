@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "628800086735",
+    "project_id": "medifyauth",
+    "storage_bucket": "medifyauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628800086735:android:d5a381c4a21e2c7af14dba",
+        "android_client_info": {
+          "package_name": "com.example.flutter_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628800086735-9v7e44ntqnod9ic5kr64qm6h6ohtm5s7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutter_auth",
+            "certificate_hash": "ba1ef21a4abf2b5f5439bb5682609aee21840980"
+          }
+        },
+        {
+          "client_id": "628800086735-mlgdcds3kur38tncgf7lp04qhuufeevm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_W5_vhfD6inW09bLrGYpodY4_YqsABco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628800086735-mlgdcds3kur38tncgf7lp04qhuufeevm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
