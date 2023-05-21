@@ -46,13 +46,17 @@ dependencies:
   dio: ^5.1.1
   animated_background: ^2.0.0
   sizer: ^2.0.15
-  google_fonts : ^3.0.1
+  google_fonts: ^4.0.4
   fab_circular_menu: ^1.0.2
   flutter_svg:
   permission_handler:
   open_file_plus:
+  flutter_document_picker: ^5.2.1
+  syncfusion_flutter_pdfviewer: ^21.2.5
+  device_info_plus: ^8.1.0
 
 dev_dependencies:
+  chewie_audio: ^1.5.0
   flutter_test:
     sdk: flutter
 

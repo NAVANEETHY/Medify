@@ -205,7 +205,7 @@ Container uploadFileButton(BuildContext context) {
                 const SizedBox(
                   width: 10,
                 ),
-                const Text("Upload your case histories",
+                const Text("case history",
                     style: const TextStyle(
                         color: Colors.black87,
                         fontWeight: FontWeight.bold,
@@ -248,7 +248,7 @@ Container showCaseButton(BuildContext context) {
                 const SizedBox(
                   width: 10,
                 ),
-                const Text("Show case histories",
+                const Text("case history",
                     style: const TextStyle(
                         color: Colors.black87,
                         fontWeight: FontWeight.bold,

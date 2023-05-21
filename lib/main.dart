@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:Medify/screens/splashscreen.dart';
 import 'package:Medify/utils/color_utils.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,7 +92,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Authentication',
+      title: 'Medify',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -104,7 +105,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const signIn(),
+        home: const SplashScreen(),
     );
   }
 }*/
