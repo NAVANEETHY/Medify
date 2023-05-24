@@ -12,6 +12,7 @@ import 'package:dio/dio.dart';
 import 'package:Medify/screens/files.dart';
 import 'package:Medify/screens/signin.dart';
 import 'package:Medify/screens/homepage.dart';
+import 'package:flutter/services.dart';
 
 Image logoWidget(String imageName) {
   return Image.asset(
@@ -205,7 +206,7 @@ Container uploadFileButton(BuildContext context) {
                 const SizedBox(
                   width: 10,
                 ),
-                const Text("case history",
+                const Text("Upload case history",
                     style: const TextStyle(
                         color: Colors.black87,
                         fontWeight: FontWeight.bold,
@@ -248,7 +249,7 @@ Container showCaseButton(BuildContext context) {
                 const SizedBox(
                   width: 10,
                 ),
-                const Text("case history",
+                const Text("Show case history",
                     style: const TextStyle(
                         color: Colors.black87,
                         fontWeight: FontWeight.bold,
@@ -259,3 +260,82 @@ Container showCaseButton(BuildContext context) {
         ),
       ));
 }
+
+
+
+
+Future<bool> backButtonPressed(BuildContext context) async {
+  bool exitApp = false;
+
+  Future<void> _showExitConfirmationDialog() async {
+    exitApp = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Exit Medify"),
+          content: const Text("Do you want to close the app?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text("No"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (exitApp ?? false) {
+      SystemNavigator.pop(); // Exit the app
+    }
+  }
+
+  await _showExitConfirmationDialog();
+
+  return exitApp ?? false;
+}
+
+
+/*Future<bool> backButtonPressed(BuildContext context) async {
+  bool exitApp = false;
+
+  Future<void> _showExitConfirmationDialog() async {
+    exitApp = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Exit Medify"),
+          content: const Text("Do you want to close the app?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: const Text("No"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  await _showExitConfirmationDialog();
+
+  return exitApp ?? false;
+}*/
+
+
+

@@ -11,106 +11,110 @@ import 'package:Medify/screens/caseHistory.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:Medify/reusable_widgets/reusableWidgets.dart';
+import 'package:flutter/services.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        //backgroundColor: bg,
-        appBar: AppBar(
-          backgroundColor: appBar,
-          actions: [
-            PopupMenuButton(
-              // add icon, by default "3 dot" icon
-              // icon: Icon(Icons.book)
-              itemBuilder: (context) {
-                return [
-                  const PopupMenuItem<int>(
-                    value: 0,
-                    child: Text("My Account"),
-                  ),
-                  const PopupMenuItem<int>(
-                    value: 1,
-                    child: Text("Settings"),
-                  ),
-                   PopupMenuItem<int>(
-                    value: 2,
-                    child: IconButton(
-                        onPressed: ()=>Logout(context),
-                        icon: Icon(
-                          Icons.logout,
-                          color: kPrim,
-                        )),
-                  ),
-                ];
-              },
+    return WillPopScope(
+        onWillPop: () => backButtonPressed(context),
+        child: Scaffold(
+            //backgroundColor: bg,
+            appBar: AppBar(
+              backgroundColor: appBar,
+              actions: [
+                PopupMenuButton(
+                  // add icon, by default "3 dot" icon
+                  // icon: Icon(Icons.book)
+                  itemBuilder: (context) {
+                    return [
+                      const PopupMenuItem<int>(
+                        value: 0,
+                        child: Text("My Account"),
+                      ),
+                      const PopupMenuItem<int>(
+                        value: 1,
+                        child: Text("Settings"),
+                      ),
+                      PopupMenuItem<int>(
+                        value: 2,
+                        child: IconButton(
+                            onPressed: () => Logout(context),
+                            icon: Icon(
+                              Icons.logout,
+                              color: kPrim,
+                            )),
+                      ),
+                    ];
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(2.h),
-          child: Column(
-            children: [
-              const TopContainer(),
-              SizedBox(
-                height: 2.h,
+            body: Padding(
+              padding: EdgeInsets.all(2.h),
+              child: Column(
+                children: [
+                  const TopContainer(),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  const Flexible(
+                    child: BottomContainer(),
+                  ),
+                ],
               ),
-              const Flexible(
-                child: BottomContainer(),
-              ),
-            ],
-          ),
-        ),
-        floatingActionButton: SizedBox(
-          child: FabCircularMenu(
-            // ignore: prefer_const_literals_to_create_immutables
-            ringColor: ringColor,
-            ringDiameter: 400.0,
-            ringWidth: 100,
+            ),
+            floatingActionButton: SizedBox(
+              child: FabCircularMenu(
+                // ignore: prefer_const_literals_to_create_immutables
+                ringColor: ringColor,
+                ringDiameter: 400.0,
+                ringWidth: 100,
 
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => HistoryScreen())));
-                  },
-                  icon: Icon(
-                    Icons.add_circle,
-                    color: kPrim,
-                    size: 30.00,
-                  )),
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => RemSetPage())));
-                  },
-                  icon: Icon(
-                    Icons.event,
-                    color: kPrim,
-                    size: 30.00,
-                  )),
-              IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.call,
-                    color: kPrim,
-                    size: 30.00,
-                  )),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.dark_mode_rounded,
-                    color: kPrim,
-                    size: 30.00,
-                  )),
-            ],
-          ),
-        ));
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => HistoryScreen())));
+                      },
+                      icon: Icon(
+                        Icons.add_circle,
+                        color: kPrim,
+                        size: 30.00,
+                      )),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => RemSetPage())));
+                      },
+                      icon: Icon(
+                        Icons.event,
+                        color: kPrim,
+                        size: 30.00,
+                      )),
+                  IconButton(
+                      onPressed: null,
+                      icon: Icon(
+                        Icons.call,
+                        color: kPrim,
+                        size: 30.00,
+                      )),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.dark_mode_rounded,
+                        color: kPrim,
+                        size: 30.00,
+                      )),
+                ],
+              ),
+            )));
   }
 }
 
@@ -166,3 +170,4 @@ class BottomContainer extends StatelessWidget {
     );
   }
 }
+

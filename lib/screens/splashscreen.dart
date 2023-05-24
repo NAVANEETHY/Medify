@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:Medify/screens/signin.dart';
 import 'package:sizer/sizer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:Medify/screens/homepage.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,15 +17,29 @@ class _SplashScreen extends State<SplashScreen> {
   int splashtime = 3;
   // duration of splash screen on second
 
+  var auth = FirebaseAuth.instance;
+  var isLogin = false;
+
+  checkIfLogin() async {
+    auth.authStateChanges().listen((User? user) {
+      if (user != null && mounted) {
+        setState(() {
+          isLogin = true;
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
+    checkIfLogin();
     Future.delayed(Duration(seconds: splashtime), () async {
       Navigator.pushReplacement(context, MaterialPageRoute(
           //pushReplacement = replacing the route so that
           //splash screen won't show on back button press
           //navigation to Home page.
           builder: (context) {
-        return const signIn();
+        return isLogin ? const HomePage() : const signIn();
       }));
     });
 
