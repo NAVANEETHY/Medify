@@ -11,8 +11,8 @@ import 'package:Medify/screens/caseHistory.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:Medify/reusable_widgets/reusableWidgets.dart';
+import 'package:Medify/screens/appointment.dart';
 import 'package:flutter/services.dart';
-
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -91,7 +91,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => RemSetPage())));
+                                builder: ((context) => docApp())));
                       },
                       icon: Icon(
                         Icons.event,
@@ -170,4 +170,3 @@ class BottomContainer extends StatelessWidget {
     );
   }
 }
-
