@@ -1,16 +1,12 @@
-# flutter_auth
+# Medify
 
-A new Flutter project.
+A Flutter based medicine application
 
-## Getting Started
+## Description
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project aims to develop a mobile application "Medify" which would help users to keep 
+track of their entire health history. It collects the case history from the user for the first time 
+and makes sure to give timely reminders for medicine intake, medicines repurchase ,enables easy 
+appointment booking,direct call connection to some nearest ambulance service etc. Users will 
+be able to store all their health details including previous health conditions and the 
+prescription provided on doctor consultation. It also provides strong security to user database.
