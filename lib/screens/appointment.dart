@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart' as DatePickers;
+import 'package:fluttertoast/fluttertoast.dart';
 //request.time < timestamp.date(2023, 5, 16);
 
 class docApp extends StatefulWidget {
@@ -182,6 +183,72 @@ class _docAppState extends State<docApp> {
                   )
                 : SizedBox(),
             SizedBox(height: 16.0),
+            FutureBuilder<QuerySnapshot>(
+              future: FirebaseFirestore.instance.collection('Timings').get(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+
+                if (!snapshot.hasData) {
+                  return CircularProgressIndicator();
+                }
+
+                List<DropdownMenuItem<String>> dropdownItems =
+                    snapshot.data!.docs
+                        .map((doc) => DropdownMenuItem<String>(
+                              value: doc.id,
+                              child: Text(doc.id),
+                            ))
+                        .toList();
+
+                return DropdownButton<String>(
+                  value: selectedTime,
+                  hint: Text(
+                    'Time',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  dropdownColor: Colors.white,
+                  style: TextStyle(color: Colors.black),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedTime = value;
+                    });
+                  },
+                  items: dropdownItems,
+                );
+              },
+            ),
+            SizedBox(height: 16.0),
+            TextButton(
+                style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black)),
+                onPressed: () {
+                  if (selectedLocation != null &&
+                      selectedSpecialist != null &&
+                      selectedDoctor != null &&
+                      selectedDate != null &&
+                      selectedTime != null) {
+                    Fluttertoast.showToast(
+                        msg: "Appointment booked successfully",
+                        gravity: ToastGravity.BOTTOM);
+                    /*selectedLocation = null;
+                    selectedSpecialist = null;
+                    selectedDoctor = null;
+                    selectedDate = null;
+                    selectedTime = null;*/
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => docApp()));
+                  } else {
+                    Fluttertoast.showToast(
+                        msg: "Select all the fields",
+                        gravity: ToastGravity.BOTTOM);
+                  }
+                },
+                child: Text('Submit'))
           ],
         ),
       ),
