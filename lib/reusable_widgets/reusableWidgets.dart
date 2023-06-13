@@ -166,7 +166,7 @@ Container uploadFileButton(BuildContext context) {
         onPressed: () async {
           FilePickerResult? result = await FilePicker.platform.pickFiles(
             type: FileType.custom,
-            allowedExtensions: ['pdf', 'doc', 'png', 'jpeg', 'jpg'],
+            allowedExtensions: ['pdf'],//, 'doc', 'png', 'jpeg', 'jpg'
           );
           if (result != null) {
             String filePath = result.files.single.path!;

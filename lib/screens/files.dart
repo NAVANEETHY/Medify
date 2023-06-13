@@ -63,9 +63,9 @@ class _fileScreenState extends State<fileScreen> {
                       return ListTile(
                         title: Text(file.name),
                         textColor: Colors.black,
-                        leading: IconButton(
+                        /*leading: IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.close, color: Colors.black)),
+                            icon: Icon(Icons.close, color: Colors.black)),*/
                         trailing: IconButton(
                             onPressed: () async {
                               String downloadUrl = await FirebaseStorage.instance.ref('$userId/$fileName').getDownloadURL();
@@ -76,7 +76,7 @@ class _fileScreenState extends State<fileScreen> {
                                             url:downloadUrl,
                                           )));
                             },
-                            icon: Icon(Icons.download, color: Colors.black)),
+                            icon: Icon(Icons.visibility, color: Colors.grey)),
                       );
                     });
               } else if (snapshot.hasError) {
