@@ -56,6 +56,9 @@ dependencies:
   device_info_plus: ^8.1.0
   cloud_firestore: ^4.8.0
   flutter_date_pickers: ^0.4.2
+  mailer: ^6.0.1
+  http: ^0.13.0
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   chewie_audio: ^1.5.0
@@ -90,6 +93,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

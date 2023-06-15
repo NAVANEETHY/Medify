@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:Medify/screens/splashscreen.dart';
 import 'package:Medify/utils/color_utils.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

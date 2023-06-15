@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart' as DatePickers;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart' as http;
+import 'package:Medify/services/elastic.dart';
+//import 'package:mailer/mailer.dart';
+//import 'package:mailer/smtp_server.dart';
 //request.time < timestamp.date(2023, 5, 16);
 
 class docApp extends StatefulWidget {
@@ -17,6 +22,26 @@ class _docAppState extends State<docApp> {
   String? selectedDoctor;
   DateTime? selectedDate;
   String? selectedTime;
+  String? userEmail = FirebaseAuth.instance.currentUser?.email;
+
+  sendEmail(String mailSubject, String mailBody) async {
+    String fromEmail = 'medify50@gmail.com';
+    String toEmail = userEmail.toString();
+    String subject = mailSubject;
+    String body = mailBody;
+    bool emailSent =
+        await EmailService.sendEmail(fromEmail, toEmail, subject, body);
+    if (emailSent) {
+      Fluttertoast.showToast(
+          msg: 'Confirmation mail has been sent to $toEmail',
+          gravity: ToastGravity.BOTTOM);
+    } else {
+      Fluttertoast.showToast(
+          msg: 'Error in sending mail to $toEmail',
+          gravity: ToastGravity.BOTTOM);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -178,7 +203,7 @@ class _docAppState extends State<docApp> {
             SizedBox(height: 16.0),
             selectedDate != null
                 ? Text(
-                    'Selected Date: ${selectedDate!.toString()}',
+                    'Selected Date: ${selectedDate!.toString().substring(0, 10)}',
                     style: TextStyle(color: Colors.black, fontSize: 18),
                   )
                 : SizedBox(),
@@ -230,18 +255,14 @@ class _docAppState extends State<docApp> {
                       selectedDoctor != null &&
                       selectedDate != null &&
                       selectedTime != null) {
+                    String date = selectedDate.toString().substring(0, 10);
                     Fluttertoast.showToast(
                         msg: "Appointment booked successfully",
                         gravity: ToastGravity.BOTTOM);
-                    /*selectedLocation = null;
-                    selectedSpecialist = null;
-                    selectedDoctor = null;
-                    selectedDate = null;
-                    selectedTime = null;*/
-                    Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => docApp()));
+                    sendEmail("Confirmation mail from Medify",
+                        "Appointment with $selectedDoctor has been successfully booked for $date, from $selectedTime .");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => docApp()));
                   } else {
                     Fluttertoast.showToast(
                         msg: "Select all the fields",
