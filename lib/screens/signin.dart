@@ -11,6 +11,7 @@ import 'package:Medify/screens/homepage.dart';
 import 'package:Medify/services/firebase_services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:animated_background/animated_background.dart';
+import 'package:Medify/screens/reset.dart';
 
 class signIn extends StatefulWidget {
   const signIn({super.key});
@@ -73,6 +74,15 @@ class _signInState extends State<signIn> with TickerProviderStateMixin {
                             gravity: ToastGravity.TOP);
                       }
                     }),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    TextButton(
+                      onPressed:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>resetPass())), 
+                      child: Text('Forgot password?',style: TextStyle(color: Colors.black),)),
+                    SizedBox(
+                      height: 20,
+                    ),
                     signUpOption(),
                     SizedBox(
                       height: 20,

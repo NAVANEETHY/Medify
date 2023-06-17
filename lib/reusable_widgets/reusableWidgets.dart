@@ -79,6 +79,34 @@ Container signInSignUpButton(
   );
 }
 
+Container resetButton(BuildContext context, Function onTap) {
+  return Container(
+    width: MediaQuery.of(context).size.width,
+    height: 50,
+    margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+    decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
+    child: ElevatedButton(
+      onPressed: () {
+        onTap();
+      },
+      child: Text(
+        'Send request',
+        style: const TextStyle(
+            color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+      ),
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.pressed)) {
+              return Colors.black26;
+            }
+            return Colors.white.withOpacity(0.7);
+          }),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+    ),
+  );
+}
+
 Future<void> Logout(BuildContext context) async {
   FirebaseAuth.instance.signOut().then((value) {
     Fluttertoast.showToast(msg: 'Signed out', gravity: ToastGravity.TOP);
@@ -92,7 +120,7 @@ Future<void> Logout(BuildContext context) async {
 
 Container googleSignInButton(BuildContext context) {
   return Container(
-    width: MediaQuery.of(context).size.width,
+    width:MediaQuery.of(context).size.width,
     height: 80,
     margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
@@ -104,7 +132,7 @@ Container googleSignInButton(BuildContext context) {
               context, MaterialPageRoute(builder: (context) => HomePage()));
         } catch (e) {
           Fluttertoast.showToast(
-              msg: "You haven't used google login", gravity: ToastGravity.TOP);
+              msg: "Error in login", gravity: ToastGravity.TOP);
           throw e;
         }
       },
@@ -166,7 +194,7 @@ Container uploadFileButton(BuildContext context) {
         onPressed: () async {
           FilePickerResult? result = await FilePicker.platform.pickFiles(
             type: FileType.custom,
-            allowedExtensions: ['pdf'],//, 'doc', 'png', 'jpeg', 'jpg'
+            allowedExtensions: ['pdf'], //, 'doc', 'png', 'jpeg', 'jpg'
           );
           if (result != null) {
             String filePath = result.files.single.path!;
@@ -260,9 +288,6 @@ Container showCaseButton(BuildContext context) {
         ),
       ));
 }
-
-
-
 
 Future<bool> backButtonPressed(BuildContext context) async {
   bool exitApp = false;
