@@ -13,6 +13,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:Medify/reusable_widgets/reusableWidgets.dart';
 import 'package:Medify/screens/appointment.dart';
 import 'package:flutter/services.dart';
+import 'package:Medify/screens/pharmeasy.dart';
+import 'package:Medify/screens/appollo.dart';
+import 'package:Medify/screens/netmeds.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -30,9 +33,20 @@ class HomePage extends StatelessWidget {
                   // icon: Icon(Icons.book)
                   itemBuilder: (context) {
                     return [
-                      const PopupMenuItem<int>(
+                      PopupMenuItem<int>(
                         value: 0,
-                        child: Text("My Account"),
+                        child: IconButton(
+                          onPressed: (){
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) =>netmedsScreen())));
+                          },
+                          icon:Icon(
+                            Icons.download,
+                            color: kPrim,
+                          )
+                        )
                       ),
                       const PopupMenuItem<int>(
                         value: 1,
@@ -99,14 +113,24 @@ class HomePage extends StatelessWidget {
                         size: 30.00,
                       )),
                   IconButton(
-                      onPressed: null,
+                      onPressed: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) =>pharmeasyScreen())));
+                      },
                       icon: Icon(
                         Icons.call,
                         color: kPrim,
                         size: 30.00,
                       )),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) =>ApolloScreen())));
+                      },
                       icon: Icon(
                         Icons.dark_mode_rounded,
                         color: kPrim,
