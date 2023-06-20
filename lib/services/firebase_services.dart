@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseServices {
   final _auth = FirebaseAuth.instance;
@@ -18,11 +20,13 @@ class FirebaseServices {
             idToken: googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
       }
-    } on FirebaseException catch (e) {
-      Fluttertoast.showToast(
-        msg:e.message.toString(),
-        gravity: ToastGravity.TOP);
-      throw e;
+    } on PlatformException catch (e) {
+      if (e.code == 'sign_in_canceled') {
+        Fluttertoast.showToast(
+            msg: e.message.toString(), gravity: ToastGravity.TOP);
+      } else {
+        throw e;
+      }
     }
   }
 

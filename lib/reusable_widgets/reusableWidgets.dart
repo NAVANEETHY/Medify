@@ -120,20 +120,38 @@ Future<void> Logout(BuildContext context) async {
 
 Container googleSignInButton(BuildContext context) {
   return Container(
-    width:MediaQuery.of(context).size.width,
-    height: 80,
+    width: MediaQuery.of(context).size.width,
+    height: 50,
     margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
     child: ElevatedButton(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Image.asset(
+            "assets/images/googlebg.png",
+            width: 30,
+            height: 30,
+          ),
+          Text(
+            'Sign in with google',
+            style: TextStyle(
+                color: Colors.black87,
+                fontWeight: FontWeight.bold,
+                fontSize: 16),
+          )
+        ],
+      ),
       onPressed: () async {
         try {
           await FirebaseServices().signInWithGoogle();
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+          if(FirebaseAuth.instance.currentUser?.email!=null){
+            Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+          }
         } catch (e) {
-          Fluttertoast.showToast(
-              msg: "Error in login", gravity: ToastGravity.TOP);
-          throw e;
+            Fluttertoast.showToast(
+                msg: 'sign in canceled', gravity: ToastGravity.TOP);
         }
       },
       style: ButtonStyle(
@@ -143,23 +161,25 @@ Container googleSignInButton(BuildContext context) {
             }
             return Colors.white.withOpacity(0.7);
           }),
-          shape: MaterialStateProperty.all<CircleBorder>(CircleBorder())),
-      child: Padding(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+      /*child: Padding(
         padding: EdgeInsets.all(8.0),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Image.asset(
                 "assets/images/googlebg.png",
-                width: 50,
-                height: 50,
+                width: 30,
+                height: 30,
               ),
+              Text('Sign in with google',style: TextStyle(color: Colors.black),)
             ],
           ),
         ),
-      ),
+      ),*/
     ),
   );
 }

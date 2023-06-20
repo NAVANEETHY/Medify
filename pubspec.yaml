@@ -60,6 +60,12 @@ dependencies:
   http: ^0.13.0
   flutter_dotenv: ^5.1.0
   flutter_inappwebview: ^5.7.2+3
+  rxdart:
+  provider:
+  shared_preferences:
+  lottie:
+  flutter_local_notifications: ^14.1.1
+  timezone:
 
 dev_dependencies:
   chewie_audio: ^1.5.0

@@ -7,6 +7,8 @@ import 'package:Medify/screens/splashscreen.dart';
 import 'package:Medify/utils/color_utils.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:Medify/global_bloc.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +17,103 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // This widget is the root of your application.
+  GlobalBloc? globalBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    globalBloc = GlobalBloc();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Provider<GlobalBloc>.value(
+        value: globalBloc!,
+        child: Sizer(builder: (context, orientation, deviceType) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            themeMode: ThemeMode.system,
+            theme: ThemeData.dark().copyWith(
+              primaryColor: kPrim,
+              scaffoldBackgroundColor: kScaff,
+              appBarTheme: AppBarTheme(
+                  toolbarHeight: 7.h,
+                  backgroundColor: kScaff,
+                  elevation: 0,
+                  iconTheme: IconThemeData(
+                    color: kSec,
+                    size: 20.sp,
+                  ),
+                  titleTextStyle: GoogleFonts.mulish(
+                    color: kText,
+                    fontWeight: FontWeight.w800,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 16.sp,
+                  )),
+              textTheme: TextTheme(
+                displayLarge: GoogleFonts.eczar(
+                  fontSize: 25.sp,
+                  color: kText,
+                  fontWeight: FontWeight.w500,
+                ),
+                displayMedium: GoogleFonts.aBeeZee(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w300,
+                  color: kError,
+                ),
+                displaySmall: GoogleFonts.poppins(
+                  fontSize: 19.sp,
+                  color: kSec,
+                ),
+              ),
+              /*inputDecorationTheme: const InputDecorationTheme(
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: kTextLight,
+                    width: 0.7,
+                  ),
+                ),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: kTextLight),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: kPrim,
+                  ),
+                ),
+              ),*/
+              timePickerTheme: TimePickerThemeData(
+                backgroundColor: kText,
+                hourMinuteColor: appBar,
+                hourMinuteTextColor: kScaff,
+                dayPeriodColor: appBar,
+                dayPeriodTextColor: kOther,
+                dialBackgroundColor: appBar,
+                dialHandColor: kOther,
+                dialTextColor: kScaff,
+                entryModeIconColor: kOther,
+                dayPeriodTextStyle: GoogleFonts.aBeeZee(
+                  fontSize: 8.sp,
+                ),
+              ),
+            ),
+            home: const SplashScreen(),
+          );
+        }));
+  }
+}
+
+/*class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -110,4 +208,4 @@ class MyApp extends StatelessWidget {
         home: const SplashScreen(),
     );
   }
-}*/
+}*/*/

@@ -3,6 +3,9 @@ import 'package:Medify/screens/signin.dart';
 import 'package:sizer/sizer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:Medify/screens/homepage.dart';
+import 'package:lottie/lottie.dart';
+import 'package:Medify/utils/color_utils.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -50,46 +53,63 @@ class _SplashScreen extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Sizer(builder: ((context, orientation, deviceType) {
       return Scaffold(
+          backgroundColor: Colors.white,
           body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-              alignment: Alignment.center,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  //vertically align center
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 15),
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.only(
-                        bottom: 1.h,
-                      ),
-                      child: Text(
-                        'Live happily.\nLive healthily.',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.displayLarge,
-                      ),
-                    ),
-                    Container(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      //vertically align center
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 15),
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(
+                            top: 0.3.h,
+                          ),
+                          child: Text(
+                            'Live happily.\nLive healthily.',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                    color: appBar,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Material(
+                          color: Colors.white,
+                          child: Center(
+                            child: Lottie.asset(
+                              'assets/images/splash.json',
+                              alignment: Alignment.center,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                        /*  Container(
                       alignment: Alignment.center,
                       child: Image.asset(
-                        "assets/images/spscn.png",
+                        "assets/spscn.png",
                         height: 300.0,
                         // color: Colors.white,
                         // colorBlendMode: BlendMode.colorBurn,
                         // filterQuality: FilterQuality.high,
                         //  fit: BoxFit.fill,
                       ),
-                    ),
-                    SizedBox(
-                      height: 2.h,
-                    ),
-                    Container(
+                    ), */
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        /*  Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.only(top: 30.0),
                       child: Image.asset(
-                        "assets/images/logo1mod.png",
+                        "assets/logo1.png",
                         height: 250.0,
                         width: 500.0,
                         //  color: Colors.white,
@@ -98,10 +118,10 @@ class _SplashScreen extends State<SplashScreen> {
                         filterQuality: FilterQuality.high,
                         fit: BoxFit.fill,
                       ),
-                    ),
-                  ])),
-        ],
-      ));
+                    ), */
+                      ])),
+            ],
+          ));
     }));
   }
 }

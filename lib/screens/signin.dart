@@ -64,7 +64,7 @@ class _signInState extends State<signIn> with TickerProviderStateMixin {
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
                             email: _emailTextController.text,
                             password: _passwordTextController.text);
-                        Navigator.push(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => HomePage()));
@@ -126,7 +126,7 @@ Row orOption() {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       const Text(
-        'Or login with',
+        'Or',
         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
       )
     ],
