@@ -46,14 +46,14 @@ class _HomePageState extends State<HomePage> {
               // icon: Icon(Icons.book)
               itemBuilder: (context) {
                 return [
-                  const PopupMenuItem<int>(
+                  /*const PopupMenuItem<int>(
                     value: 0,
                     child: Text("My Account"),
                   ),
                   const PopupMenuItem<int>(
                     value: 1,
                     child: Text("Settings"),
-                  ),
+                  ),*/
                   PopupMenuItem<int>(
                     value: 2,
                     child: IconButton(

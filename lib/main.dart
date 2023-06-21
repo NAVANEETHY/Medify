@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         child: Sizer(builder: (context, orientation, deviceType) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title:'Medify',
             themeMode: ThemeMode.system,
             theme: ThemeData.dark().copyWith(
               primaryColor: kPrim,

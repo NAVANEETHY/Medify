@@ -59,7 +59,7 @@ class _signInState extends State<signIn> with TickerProviderStateMixin {
                     SizedBox(
                       height: 20,
                     ),
-                    signInSignUpButton(context, false, () async {
+                    signInSignUpButton(context, true, () async {
                       try {
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
                             email: _emailTextController.text,

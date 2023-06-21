@@ -13,6 +13,7 @@ import 'package:Medify/screens/files.dart';
 import 'package:Medify/screens/signin.dart';
 import 'package:Medify/screens/homepage.dart';
 import 'package:flutter/services.dart';
+import 'package:Medify/utils/color_utils.dart';
 
 Image logoWidget(String imageName) {
   return Image.asset(
@@ -62,7 +63,7 @@ Container signInSignUpButton(
         onTap();
       },
       child: Text(
-        isLogin ? 'LOG IN' : 'SIGN UP',
+        isLogin ? 'LOGIN' : 'SIGN UP',
         style: const TextStyle(
             color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
       ),
@@ -145,13 +146,13 @@ Container googleSignInButton(BuildContext context) {
       onPressed: () async {
         try {
           await FirebaseServices().signInWithGoogle();
-          if(FirebaseAuth.instance.currentUser?.email!=null){
+          if (FirebaseAuth.instance.currentUser?.email != null) {
             Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
+                context, MaterialPageRoute(builder: (context) => HomePage()));
           }
         } catch (e) {
-            Fluttertoast.showToast(
-                msg: 'sign in canceled', gravity: ToastGravity.TOP);
+          Fluttertoast.showToast(
+              msg: 'sign in canceled', gravity: ToastGravity.TOP);
         }
       },
       style: ButtonStyle(
@@ -345,6 +346,34 @@ Future<bool> backButtonPressed(BuildContext context) async {
   await _showExitConfirmationDialog();
 
   return exitApp ?? false;
+}
+
+Container Restock(BuildContext context, String Medical, Function onTap) {
+  return Container(
+    width: 300, //MediaQuery.of(context).size.width,
+    height: 50,
+    margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+    decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
+    child: ElevatedButton(
+      onPressed: () {
+        onTap();
+      },
+      child: Text(
+        Medical,
+        style: const TextStyle(
+            color: appBar, fontWeight: FontWeight.bold, fontSize: 16),
+      ),
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.pressed)) {
+              return Colors.black26;
+            }
+            return Colors.white.withOpacity(0.7);
+          }),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)))),
+    ),
+  );
 }
 
 
