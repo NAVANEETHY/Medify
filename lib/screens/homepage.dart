@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:Medify/utils/color_utils.dart';
 import 'package:Medify/screens/rem_set_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sizer/sizer.dart';
 import 'package:Medify/services/firebase_services.dart';
 import 'package:Medify/screens/caseHistory.dart';
@@ -23,6 +24,7 @@ import 'package:Medify/screens/nav_bar.dart';
 import 'package:Medify/screens/remsetscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,17 +38,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () => backButtonPressed(context),
-    child:Scaffold(
-        //backgroundColor: bg,
-        appBar: AppBar(
-          backgroundColor: appBar,
-          actions: [
-            PopupMenuButton(
-              // add icon, by default "3 dot" icon
-              // icon: Icon(Icons.book)
-              itemBuilder: (context) {
-                return [
-                  /*const PopupMenuItem<int>(
+        child: Scaffold(
+            //backgroundColor: bg,
+            appBar: AppBar(
+              backgroundColor: appBar,
+              actions: [
+                PopupMenuButton(
+                  // add icon, by default "3 dot" icon
+                  // icon: Icon(Icons.book)
+                  itemBuilder: (context) {
+                    return [
+                      /*const PopupMenuItem<int>(
                     value: 0,
                     child: Text("My Account"),
                   ),
@@ -54,75 +56,86 @@ class _HomePageState extends State<HomePage> {
                     value: 1,
                     child: Text("Settings"),
                   ),*/
-                  PopupMenuItem<int>(
-                    value: 2,
-                    child: IconButton(
-                        onPressed: () => Logout(context),
-                        icon: Icon(
-                          Icons.logout,
-                          color: kPrim,
-                        )),
-                  ),
-                ];
-              },
+                      PopupMenuItem<int>(
+                        value: 2,
+                        child: IconButton(
+                            onPressed: () => Logout(context),
+                            icon: Icon(
+                              Icons.logout,
+                              color: kPrim,
+                            )),
+                      ),
+                    ];
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(2.h),
-          child: Column(
-            children: [
-              const TopContainer(),
-              SizedBox(
-                height: 2.h,
+            body: Padding(
+              padding: EdgeInsets.all(2.h),
+              child: Column(
+                children: [
+                  const TopContainer(),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  const Flexible(
+                    child: BottomContainer(),
+                  ),
+                ],
               ),
-              const Flexible(
-                child: BottomContainer(),
-              ),
-            ],
-          ),
-        ),
-        drawer: NavBar(),
-        floatingActionButton: SizedBox(
-          child: FabCircularMenu(
-            // ignore: prefer_const_literals_to_create_immutables
-            ringColor: ringColor,
-            ringDiameter: 400.0,
-            ringWidth: 100,
+            ),
+            drawer: NavBar(),
+            floatingActionButton: SizedBox(
+              child: FabCircularMenu(
+                // ignore: prefer_const_literals_to_create_immutables
+                ringColor: ringColor,
+                ringDiameter: 400.0,
+                ringWidth: 100,
 
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => RemSetScreen())));
-                  },
-                  icon: Icon(
-                    Icons.add_circle,
-                    color: kPrim,
-                    size: 30.00,
-                  )),
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => docApp())));
-                  },
-                  icon: Icon(
-                    Icons.event,
-                    color: kPrim,
-                    size: 30.00,
-                  )),
-              IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.call,
-                    color: kPrim,
-                    size: 30.00,
-                  )),
-            ],
-          ),
-        )));
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => RemSetScreen())));
+                      },
+                      icon: Icon(
+                        Icons.add_circle,
+                        color: kPrim,
+                        size: 30.00,
+                      )),
+                  IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => docApp())));
+                      },
+                      icon: Icon(
+                        Icons.event,
+                        color: kPrim,
+                        size: 30.00,
+                      )),
+                  IconButton(
+                      onPressed: () async {
+                        final Uri url = Uri(scheme: 'tel', path: '108');
+                        if (await canLaunchUrl(url)) {
+                          await launchUrl(url);
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: 'Failed to connect',
+                              gravity: ToastGravity.BOTTOM);
+                        }
+                      },
+                      icon: Icon(
+                        Icons.call,
+                        color: kPrim,
+                        size: 30.00,
+                      )),
+                ],
+              ),
+            )));
   }
 }
 
