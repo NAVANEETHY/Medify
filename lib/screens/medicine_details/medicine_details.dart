@@ -5,6 +5,7 @@ import 'package:Medify/global_bloc.dart';
 import 'package:Medify/utils/medicine.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:Medify/screens/homepage.dart';
 
 class MedicineDetails extends StatefulWidget {
   const MedicineDetails({super.key, required this.medicine});
@@ -89,7 +90,9 @@ class _MedicineDetailsState extends State<MedicineDetails> {
               onPressed: () {
                 //global bloc to delete
                 _globalBloc.removeMedicine(widget.medicine);
-                Navigator.popUntil(context, (route) => route.isFirst);
+                //Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => HomePage())));
               },
               child: Text(
                 'OK',
