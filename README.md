@@ -10,3 +10,7 @@ and makes sure to give timely reminders for medicine intake, medicines repurchas
 appointment booking,direct call connection to some nearest ambulance service etc. Users will 
 be able to store all their health details including previous health conditions and the 
 prescription provided on doctor consultation. It also provides strong security to user database.
+
+## App Demo
+
+Medify app demo video is provided in the AppDemo folder
